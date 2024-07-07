@@ -35,7 +35,7 @@ while true; do
             chmod +x $backup_script
 
             # add to cron
-           (crontab -l; echo "0 0 */30 * * $backup_file" ) | crontab -
+           (crontab -l; echo "0 0 */30 * * $backup_script" ) | crontab -
             echo "Backup successfully added!"
             ;;
         2)
