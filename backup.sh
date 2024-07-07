@@ -76,7 +76,7 @@ function add_backup_telegram() {
         if [ ! -d "/root/backup/shell/" ]; then
           mkdir -p /root/backup/shell/
         fi
-
+              backup_script="/root/backup/shell/$db_name.sh"
                       echo "#!/bin/bash" > $backup_script
                       echo "mysqldump -u $username -p $password $db_name > /root/backup/"$db_name".sql" >> $backup_script
                       echo 'if [ $? -eq 0 ]; then' >> $backup_script
