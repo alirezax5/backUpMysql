@@ -5,7 +5,17 @@ if ! which crontab > /dev/null; then
     echo "cron is not installed. Installing..."
     sudo apt-get install cron
 fi
-
+function display_menu() {
+    echo "==================================="
+    echo "MySQL backup management menu"
+    echo "https://github.com/alirezax5/backUpMysql"
+    echo "==================================="
+    echo "1) Add backup"
+    echo "2) delete the backup"
+    echo "3) Exit"
+    echo "==================================="
+    echo "Enter your choice:"
+}
 function add_backup() {
     # add backup
               echo "Enter the database name:"
