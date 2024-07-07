@@ -6,15 +6,15 @@ if ! which crontab > /dev/null; then
     sudo apt-get install cron
 fi
 function display_menu() {
-    echo "==================================="
+    echo "\033[1;33m===================================\033[0m"
     echo "MySQL backup management menu"
     echo "https://github.com/alirezax5/backUpMysql"
-    echo "==================================="
+    echo "\033[1;33m===================================\033[0m"
     echo "1) Add backup"
     echo "2) Add backup & send to telegram"
     echo "3) delete the backup"
     echo "0) Exit"
-    echo "==================================="
+    echo "\033[1;33m===================================\033[0m"
     echo "Enter your choice:"
 }
 function add_backup() {
@@ -77,6 +77,7 @@ function add_backup_telegram() {
           mkdir -p /root/backup/shell/
         fi
               backup_scripts="/root/backup/shell/$db_name.sh"
+
                       echo "#!/bin/bash" > $backup_scripts
                       echo "mysqldump -u $username -p $password $db_name > /root/backup/"$db_name".sql" >> $backup_scripts
                       echo 'if [ $? -eq 0 ]; then' >> $backup_scripts
@@ -86,6 +87,8 @@ function add_backup_telegram() {
                                      -F "chat_id=$chatid" \
                                      -F "document=@/root/backup/"$db_name".sql" \
                                      "https://api.telegram.org/bot$telegram_token/sendDocument"" >> $backup_scripts
+
+
                       chmod +x $backup_scripts
 
                       # add to cron
