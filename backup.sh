@@ -76,20 +76,20 @@ function add_backup_telegram() {
         if [ ! -d "/root/backup/shell/" ]; then
           mkdir -p /root/backup/shell/
         fi
-              backup_script="/root/backup/shell/$db_name.sh"
-                      echo "#!/bin/bash" > $backup_script
-                      echo "mysqldump -u $username -p $password $db_name > /root/backup/"$db_name".sql" >> $backup_script
-                      echo 'if [ $? -eq 0 ]; then' >> $backup_script
-                      echo ' echo "بکاپ پایگاه داده با موفقیت انجام شد: $backup_file"' >> $backup_script
-                      echo 'send_backup_to_telegram "$backup_file"'>> $backup_script
+              backup_scripts="/root/backup/shell/$db_name.sh"
+                      echo "#!/bin/bash" > $backup_scripts
+                      echo "mysqldump -u $username -p $password $db_name > /root/backup/"$db_name".sql" >> $backup_scripts
+                      echo 'if [ $? -eq 0 ]; then' >> $backup_scripts
+                      echo ' echo "بکاپ پایگاه داده با موفقیت انجام شد: $backup_file"' >> $backup_scripts
+                      echo 'send_backup_to_telegram "$backup_file"'>> $backup_scripts
                       echo " curl -H "Authorization: Bot $telegram_token" \
                                      -F "chat_id=$chatid" \
                                      -F "document=@/root/backup/"$db_name".sql" \
-                                     "https://api.telegram.org/bot$telegram_token/sendDocument"" >> $backup_script
-                      chmod +x $backup_script
+                                     "https://api.telegram.org/bot$telegram_token/sendDocument"" >> $backup_scripts
+                      chmod +x $backup_scripts
 
                       # add to cron
-                     (crontab -l; echo "0 0 */30 * * $backup_script" ) | crontab -
+                     (crontab -l; echo "0 0 */30 * * $backup_scripts" ) | crontab -
                       echo "Backup successfully added!"
 }
 # menu
