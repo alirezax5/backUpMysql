@@ -24,15 +24,18 @@ while true; do
             echo "Enter the database password:"
             read password
 
+             if [ ! -d "/root/backup/shell/" ]; then
+             mkdir -p /root/backup/shell/
+             fi
             # creating shell
             backup_script="/root/backup/shell/$backup_name.sh"
+
             echo "#!/bin/bash" > $backup_script
             echo "mysqldump -u $username root -p $password $db_name  > /root/backup/$backup_name.sql" >> $backup_script
             chmod +x $backup_script
 
             # add to cron
-            crontab -e
-            echo "0 0,30 * * * $backup_script" >> crontab
+           (crontab -l; echo "0 0 */30 * * $backup_file" ) | crontab -
             echo "Backup successfully added!"
             ;;
         2)
