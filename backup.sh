@@ -19,8 +19,7 @@ while true; do
             # add backup
             echo "Enter the database name:"
             read db_name
-            echo "Enter the name of the table:"
-            read table_name
+
             echo "Enter the database username:"
             read username
             echo "Enter the database password:"
@@ -29,7 +28,7 @@ while true; do
             # creating shell
             backup_script="/root/backup/shell/$backup_name.sh"
             echo "#!/bin/bash" > $backup_script
-            echo "mysqldump -u $username root -p $password $db_name $table_name > /root/backup/$backup_name.sql" >> $backup_script
+            echo "mysqldump -u $username root -p $password $db_name  > /root/backup/$backup_name.sql" >> $backup_script
             chmod +x $backup_script
 
             # add to cron
