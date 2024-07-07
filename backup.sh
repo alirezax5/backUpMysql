@@ -32,7 +32,7 @@ function add_backup() {
               backup_script="/root/backup/shell/$db_name.sh"
 
               echo "#!/bin/bash" > $backup_script
-              echo "mysqldump -u $username root -p $password $db_name  > /root/backup/$(date +%Y-%m-%d-%H-%M)_$db_name.sql" >> $backup_script
+              echo "mysqldump -u $username -p $password $db_name > /root/backup/$(eval echo date +%Y-%m-%d-%H-%M)_"$db_name".sql" >> $backup_script
               chmod +x $backup_script
 
               # add to cron
