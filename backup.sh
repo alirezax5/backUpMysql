@@ -19,7 +19,6 @@ while true; do
             # add backup
             echo "Enter the database name:"
             read db_name
-
             echo "Enter the database username:"
             read username
             echo "Enter the database password:"
